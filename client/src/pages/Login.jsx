@@ -59,7 +59,7 @@ export default function Login() {
           <div>
             <p className="mb-5 text-center text-primary-500 text-base">
               Don&apos;t have any account?&nbsp;
-              <Link to="/signup" className="hover:underline hover:text-primary-700 font-semibold">
+              <Link to="/" className="hover:underline hover:text-primary-700 font-semibold">
                 Sign up
               </Link>
             </p>
