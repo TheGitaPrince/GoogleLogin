@@ -2,13 +2,13 @@
 
 A full-stack notes-taking web application built using **Node.js**, **Express**, **MongoDB** for the backend, and **React** (Vite.js) for the frontend. This project features robust authentication with **Google OAuth** and **OTP-based signup/login with email**, secure JWT token management, and supports note creation & deletion.
 
-> **Live Demo:** [Vercel Deployment Link](https://your-vercel-app-url/)  
-> **GitHub:** [@thegitaprince](https://github.com/thegitaprince)
+> **Live Demo:** [Vercel Deployment Link](https://google-login-v853.vercel.app/)  
+> **GitHub:** [@thegitaprince](https://github.com/thegitaprince/GoogleLogin)
 
 ---
 ## 🖼️ App Screenshots
 
-- ![Signup & Login](public/image.png)
+- ![Signup & Login](client/public/image.png)
 
 ---
 ## ✨ Features
