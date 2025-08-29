@@ -8,7 +8,10 @@ A full-stack notes-taking web application built using **Node.js**, **Express**, 
 ---
 ## 🖼️ App Screenshots
 
-- ![Signup & Login](client/public/image.png)
+- ![Welcome & Create Notes](client/public/welcome.png)
+- ![Signup ](client/public/signup.png)
+- ![Signin](client/public/signin.png)
+- ![Otp Verification](client/public/otpVerify.png)
 
 ---
 ## ✨ Features

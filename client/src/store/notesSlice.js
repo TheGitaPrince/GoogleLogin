@@ -30,7 +30,9 @@ export const getNotes = createAsyncThunk('getNotes', async (_, { rejectWithValue
 
 const initialState = {
     notesList: [],
-    loading: false,
+    loadingGet: false,
+    loadingCreate: false,
+    loadingDelete: false,
     error: null
 };
 
@@ -40,37 +42,37 @@ const notesSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(createNotes.pending, (state) => {
-                state.loading = true;
+                state.loadingCreate = true;
                 state.error = null;
             })
             .addCase(createNotes.fulfilled, (state) => {
-                state.loading = false;
+                state.loadingCreate = false;
             }) 
             .addCase(createNotes.rejected, (state, action) => {
-                state.loading = false;
+                state.loadingCreate = false;
                 state.error = action.payload?.message
             })          
             .addCase(deleteNotes.pending, (state) => {
-                state.loading = true;
+                state.loadingDelete = true;
                 state.error = null;
             })
             .addCase(deleteNotes.fulfilled, (state) => {
-                state.loading = false;
+                state.loadingDelete= false;
             })
             .addCase(deleteNotes.rejected, (state, action) => {
-                state.loading = false;
+                state.loadingDelete = false;
                 state.error = action.payload?.message
             })
             .addCase(getNotes.pending, (state) => {
-                state.loading = true;
+                state.loadingGet = true;
                 state.error = null;
             })
             .addCase(getNotes.fulfilled, (state, action) => {
-                state.loading = false;
+                state.loadingGet = false;
                 state.notesList = action.payload;
             }) 
             .addCase(getNotes.rejected, (state, action) => {
-                state.loading = false;
+                state.loadingGet = false;
                 state.error = action.payload?.message
             })    
      },

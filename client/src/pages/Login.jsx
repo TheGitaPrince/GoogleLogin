@@ -74,7 +74,7 @@ export default function Login() {
               />
               <button
                 type="submit"
-                className="w-full rounded-lg px-4 py-2 font-semibold cursor-pointer transition-all duration-200 bg-green-600 hover:bg-green-700 text-white"
+                className="w-full rounded-lg px-4 py-2 font-semibold cursor-pointer transition-all duration-200 bg-blue-950/90 hover:bg-blue-950/100 text-white"
                 disabled={loading}
               >
                 {loading ? "Sending OTP..." : "Sign in"}
@@ -97,7 +97,7 @@ export default function Login() {
               />
               <button
                 type="submit"
-                className="w-full rounded-lg px-4 py-2 font-semibold cursor-pointer transition-all duration-200 bg-green-600 hover:bg-green-700 text-white"
+                className="w-full rounded-lg px-4 py-2 font-semibold cursor-pointer transition-all duration-200 bg-blue-950/90 hover:bg-blue-950/100 text-white"
                 disabled={loading}
               >
                 {loading ? "Verifying OTP..." : "Verify OTP"}
@@ -110,7 +110,7 @@ export default function Login() {
                 setOtp('');
                 setEmailForOtp('');
               }}
-              className="mt-4 w-full text-center text-blue-600 hover:underline"
+              className="mt-4 w-full text-center text-blue-950/90 hover:underline"
               type="button"
             >
               &larr; Back to Signup

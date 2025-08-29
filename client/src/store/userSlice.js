@@ -123,6 +123,7 @@ const userSlice = createSlice({
                 state.error = null;
             })
             .addCase(logoutUser.fulfilled, (state) => {
+                state.loading = false;
                 state.user = null;
                 localStorage.removeItem("user");
                 localStorage.removeItem("accessToken");
