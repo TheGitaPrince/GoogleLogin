@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
-import { createUser, verifyOtp, googleLogin } from "../store/userSlice.js";
+import { createUser, verifyOtp, googleLogin,  resetAuthState } from "../store/userSlice.js";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -62,7 +62,18 @@ export default function Signup() {
   const handleBackToSignup = () => {
     setEmailForOtp("");
     setOtp("");
+    dispatch(resetAuthState());
   };
+
+  if (loading) {
+   return (
+     <section className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
+       <div className="w-full max-w-md bg-white rounded-xl py-10 px-8 shadow-lg flex flex-col items-center">
+        <span className="animate-pulse text-lg text-blue-950/90">Processing...</span>
+       </div>
+     </section>
+   );
+  }
 
   return (
     <section className="flex items-center justify-center py-8 min-h-screen bg-gray-50 px-4">

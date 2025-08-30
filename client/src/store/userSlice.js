@@ -55,6 +55,10 @@ export const logoutUser = createAsyncThunk('logoutUser', async (_,{ rejectWithVa
     }
 });
 
+export const resetAuthState = () => (dispatch) => {
+  dispatch({ type: "auth/resetState" });
+};
+
 const initialState = {
     user: JSON.parse(localStorage.getItem("user")) || null,
     loading: false,
@@ -66,6 +70,13 @@ const initialState = {
 const userSlice = createSlice({
     name: "auth",
     initialState,
+    reducers: {
+       resetState: (state) => {
+          state.otpSent = false;
+          state.authMethod = null;
+          state.error = null;
+       }
+    }
     extraReducers: (builder) => {
         builder
             .addCase(createUser.pending, (state) => {
@@ -132,12 +143,16 @@ const userSlice = createSlice({
             .addCase(logoutUser.fulfilled, (state) => {
                 state.loading = false;
                 state.user = null;
+                state.otpSent = false;
+                state.authMethod = null;
                 localStorage.removeItem("user");
                 localStorage.removeItem("accessToken");
                 localStorage.removeItem("refreshToken");
             })           
             .addCase(logoutUser.rejected, (state) => {
                 state.loading = false;
+                state.otpSent = false;
+                state.authMethod = null;
             })
      },
 });
