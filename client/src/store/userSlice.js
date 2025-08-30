@@ -58,7 +58,9 @@ export const logoutUser = createAsyncThunk('logoutUser', async (_,{ rejectWithVa
 const initialState = {
     user: JSON.parse(localStorage.getItem("user")) || null,
     loading: false,
-    error: null
+    error: null,
+    otpSent: false,
+    authMethod: null
 };
 
 const userSlice = createSlice({
@@ -69,9 +71,11 @@ const userSlice = createSlice({
             .addCase(createUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.authMethod = "manual";
             })
             .addCase(createUser.fulfilled, (state, action) => {
                 state.loading = false;
+                state.otpSent = true;
             })
             .addCase(createUser.rejected, (state, action) => {
                 state.loading = false;
@@ -83,6 +87,7 @@ const userSlice = createSlice({
             })
             .addCase(verifyOtp.fulfilled, (state, action) => {
                 state.loading = false;
+                state.otpSent = false;
                 state.user = action.payload.user;
                 localStorage.setItem("user", JSON.stringify(action.payload.user));
                 localStorage.setItem("accessToken", action.payload.accessToken);
@@ -106,9 +111,11 @@ const userSlice = createSlice({
             .addCase(googleLogin.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.authMethod = "google";
              })
              .addCase(googleLogin.fulfilled, (state, action) => {
                  state.loading = false;
+                 state.otpSent = false;
                  state.user = action.payload.user;
                  localStorage.setItem("user", JSON.stringify(action.payload.user));
                  localStorage.setItem("accessToken", action.payload.accessToken);

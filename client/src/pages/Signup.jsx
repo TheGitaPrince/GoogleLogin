@@ -8,13 +8,11 @@ import toast from "react-hot-toast";
 export default function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error, otpSent, authMethod } = useSelector((state) => state.auth);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
   const [otp, setOtp] = useState("");
-  const [otpSent, setOtpSent] = useState(false);
   const [emailForOtp, setEmailForOtp] = useState("");
 
   useEffect(() => {
@@ -32,7 +30,6 @@ export default function Signup() {
     const response = await dispatch(createUser({ name, email }));
     if (createUser.fulfilled.match(response)) {
       toast.success("OTP sent to your email for signup.");
-      setOtpSent(true);
       setEmailForOtp(email);
     }
   };
@@ -62,14 +59,19 @@ export default function Signup() {
     toast.error("Google Sign In Failed");
   };
 
+  const handleBackToSignup = () => {
+    setEmailForOtp("");
+    setOtp("");
+  };
+
   return (
     <section className="flex items-center justify-center py-8 min-h-screen bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-xl py-7 px-8 shadow-lg">
         <h2 className="text-center text-2xl text-primary-700 font-bold leading-tight mb-4">
-          {otpSent ? "Verify OTP" : "Sign up to your account"}
+          {!otpSent ? "Sign up to your account" : "Verify OTP"}
         </h2>
 
-        {!otpSent ? (
+        {authMethod !== "google" && !otpSent &&  (
           <>
             <p className="mb-5 text-center text-primary-500 text-base">
               Already have an account?&nbsp;
@@ -122,7 +124,9 @@ export default function Signup() {
               />
             </div>
           </>
-        ) : (
+        )}
+        
+        { otpSent && authMethod !== "google" && (
           <>
             <p className="mb-4 text-gray-700 text-center">
               Enter the OTP sent to <strong>{emailForOtp}</strong>
@@ -146,11 +150,7 @@ export default function Signup() {
             </form>
 
             <button
-              onClick={() => {
-                setOtpSent(false);
-                setOtp("");
-                setEmailForOtp("");
-              }}
+              onClick={ handleBackToSignup }
               className="mt-4 w-full text-center text-blue-950 hover:underline"
               type="button"
             >
